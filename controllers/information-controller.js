@@ -7,7 +7,7 @@ informationController.findUserByEmail = (req, res) => {
     .then((amount) => {
       if (!amount && amount !== 0) {
         return res.json({
-          message: "User not found",
+          message: `Incoming new user ${req.query.email}`,
           isNew: true,
         });
       }

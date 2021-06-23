@@ -6,6 +6,15 @@ const paymentsController = {};
 paymentsController.manageUserPayment = (req, res) => {
   const { email, amount } = req.body;
 
+  if (+amount < 0 || +amount === 0) {
+    return res
+      .status(500)
+      .json({
+        error: "500",
+        message: "Payment cannot be a negative number or zero.",
+      });
+  }
+
   // First, check if the user is already registered to the platform
   Information.findUserByEmail(email)
     .then((prevAmount) => {
