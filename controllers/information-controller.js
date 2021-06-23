@@ -18,8 +18,8 @@ informationController.findUserByEmail = (req, res) => {
       });
     })
     .catch((err) => {
-      console.log(err);
-      res.status(500).json({ err });
+      console.error(err);
+      res.status(500).json({ error: "500", message: err });
     });
 };
 

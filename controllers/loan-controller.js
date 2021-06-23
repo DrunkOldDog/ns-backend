@@ -44,8 +44,8 @@ loanController.setUserLoan = (req, res) => {
       );
     })
     .catch((err) => {
-      console.err(err);
-      res.status(500).json({ err });
+      console.error(err);
+      res.status(500).json({ error: "500", message: err });
     });
 };
 

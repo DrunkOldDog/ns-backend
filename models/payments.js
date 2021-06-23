@@ -1,13 +1,9 @@
 const db = require("../db/database");
 
-const Information = {};
+const Payments = {};
 
-Information.findUserByEmail = async (email) => {
-  return db().findByEmail(email);
-}
+Payments.manageUserPayment = (email, amount) => {
+  return db.setByEmail(email, amount);
+};
 
-Information.setUserBalanceByEmail = (email, amount) => {
-  return db().setByEmail(email, amount);
-}
-
-module.exports = Information;
+module.exports = Payments;
