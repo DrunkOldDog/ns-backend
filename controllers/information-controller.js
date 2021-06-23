@@ -1,25 +1,25 @@
-const Information = require('../models/information');
+const Information = require("../models/information");
 
 const informationController = {};
 
 informationController.findUserByEmail = (req, res) => {
   Information.findUserByEmail(req.query.email)
-    .then(balance => {
+    .then((balance) => {
       if (!balance && balance !== 0) {
         return res.json({
-          message: 'User not found',
-          isNew: true
+          message: "User not found",
+          isNew: true,
         });
       }
 
       res.json({
-        message: 'Success',
-        data: balance
+        message: `Returning ${req.query.email} account balance.`,
+        balance,
       });
     })
-    .catch(err => {
+    .catch((err) => {
       console.log(err);
-      res.status(500).json({err});
+      res.status(500).json({ err });
     });
 };
 

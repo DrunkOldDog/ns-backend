@@ -10,12 +10,12 @@ loanController.setUserLoan = (req, res) => {
   Information.findUserByEmail(email).then(prevAmount => {
     if (prevAmount !== undefined) {
       // if the loan sum exceeded don't allow to take a new loan
-      if (prevAmount + amount > 1000) {
+      if (+prevAmount + +amount > 1000) {
         return res.status(500).json({ error: "100", message: "Amount exceeded" });
       }
 
       // otherwise, allow user to take a new loan
-      return Loan.setUserLoan(email, prevAmount + amount)
+      return Loan.setUserLoan(email, +prevAmount + +amount)
         .then(newAmount => {
           res.json({ message: `${email} new amount is ${newAmount}.` });
         });
@@ -27,7 +27,7 @@ loanController.setUserLoan = (req, res) => {
     }
 
     // otherwise, create the user with the new loan
-    Loan.setUserLoan(email, amount)
+    Loan.setUserLoan(email, +amount)
       .then(() => res.json({ message: `Created ${email} with a ${amount} loan.` }));
   }).catch(err => {
     console.err(err);
