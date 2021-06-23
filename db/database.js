@@ -1,14 +1,10 @@
-module.exports = (persistence = {}) => {
-    const findByEmail = async email => await new Promise(resolve => resolve(persistence[email]));
+const DATABASE = {};
 
-    const setByEmail = async (email, amount) => new Promise(resolve => {
-      persistence[email] = amount;
-      resolve(amount);
-    }
-  );
-
-  return {
-    findByEmail,
-    setByEmail
-  };
+module.exports = {
+  findByEmail: async email => await new Promise(resolve => resolve(DATABASE[email])),
+  setByEmail: async (email, amount) => new Promise(resolve => {
+    console.log("creating: ", email, amount);
+    DATABASE[email] = amount;
+    resolve(amount);
+  }),
 };
