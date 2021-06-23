@@ -4,8 +4,8 @@ const informationController = {};
 
 informationController.findUserByEmail = (req, res) => {
   Information.findUserByEmail(req.query.email)
-    .then((balance) => {
-      if (!balance && balance !== 0) {
+    .then((amount) => {
+      if (!amount && amount !== 0) {
         return res.json({
           message: "User not found",
           isNew: true,
@@ -13,8 +13,8 @@ informationController.findUserByEmail = (req, res) => {
       }
 
       res.json({
-        message: `Returning ${req.query.email} account balance.`,
-        balance,
+        message: `Returning ${req.query.email} account amount balance.`,
+        amount,
       });
     })
     .catch((err) => {
